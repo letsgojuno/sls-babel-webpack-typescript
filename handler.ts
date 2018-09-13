@@ -1,5 +1,8 @@
 import { APIGatewayEvent, Callback, Context, Handler } from 'aws-lambda';
 import Foo from './foo';
+import AWS from 'aws-sdk';
+
+const sts = new AWS.STS();
 
 export const hello: Handler = (
   event: APIGatewayEvent,
@@ -14,5 +17,11 @@ export const hello: Handler = (
     })
   };
 
-  cb(null, response);
+  sts
+    .getCallerIdentity()
+    .promise()
+    .then(resp => {
+      console.log(resp);
+      cb(null, response);
+    });
 };

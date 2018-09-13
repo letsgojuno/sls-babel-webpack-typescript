@@ -19,5 +19,8 @@
     "webpack-cli": "^3.1.0"
   },
   "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.315.0"
+  }
 }

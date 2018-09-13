@@ -5,7 +5,7 @@ const slsw = require('serverless-webpack');
 module.exports = {
   mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
   entry: slsw.lib.entries,
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
   },
@@ -29,6 +29,9 @@ module.exports = {
         ]
       }
     ]
+  },
+  externals: {
+    ['aws-sdk']: 'commonjs2 aws-sdk'
   },
   plugins: [new ForkTsCheckerWebpackPlugin()]
 };
