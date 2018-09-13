@@ -4,7 +4,7 @@ import AWS from 'aws-sdk';
 
 const sts = new AWS.STS();
 
-export const hello: Handler = (
+export const hello: Handler = async (
   event: APIGatewayEvent,
   context: Context,
   cb: Callback
@@ -17,11 +17,7 @@ export const hello: Handler = (
     })
   };
 
-  sts
-    .getCallerIdentity()
-    .promise()
-    .then(resp => {
-      console.log(resp);
-      cb(null, response);
-    });
+  const resp = await sts.getCallerIdentity().promise();
+
+  return response;
 };
